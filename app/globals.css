@@ -209,98 +209,39 @@
       @apply h-screen my-0 rounded-none;
       overflow: hidden;
       /* Adjusted for mobile browsers */
-      padding-top: 0;
+      height: calc(100vh - env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
     
-    /* Fix for Chrome mobile URL bar */
-    .chat-header {
-      position: sticky;
-      top: 0;
-      z-index: 50; /* Higher z-index to ensure visibility */
-      padding-top: max(10px, env(safe-area-inset-top));
-      /* Add stable backdrop for header */
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      /* Remove redundant margin */
-      margin-top: 0;
+    /* Fix system messages in mobile */
+    .chat-messages > div {
+      @apply transform-none !important;
+      opacity: 1 !important;
     }
     
-    /* Add this to fix the root container height */
-    .chat-layout {
-      min-height: -webkit-fill-available;
-      height: 100%;
+    /* Improve mobile performance */
+    .chat-messages {
+      @apply overscroll-y-contain;
+      -webkit-overflow-scrolling: touch;
     }
     
-    .detail-panel, .conversation-list {
-      @apply top-0 bottom-0 bg-white z-40;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-      /* Ensure they respect the safe area insets */
-      padding-top: env(safe-area-inset-top, 0);
-    }
-    
-    /* Ensure fixed positioned elements respect viewport */
-    .chat-header {
-      position: sticky;
-      top: env(safe-area-inset-top, 0);
-      /* Increase z-index to ensure it's above other elements */
-      z-index: 30; 
-    }
-    
-    /* Fix for iOS Safari and Chrome mobile */
-    html {
-      height: -webkit-fill-available;
-    }
-    
-    body {
-      min-height: -webkit-fill-available;
-      /* Add more body fixes */
-      @apply overflow-y-auto;
-      overscroll-behavior-y: none;
-    }
-    
-    .conversation-list {
-      @apply fixed left-0 border-r;
-      transform: translateX(-100%);
-    }
-    
-    .conversation-list.translate-x-0 {
-      transform: translateX(0);
-    }
-    
-    .detail-panel {
-      @apply fixed right-0 border-l;
-      transform: translateX(100%);
-    }
-    
-    .detail-panel.translate-x-0 {
-      transform: translateX(0);
-    }
-    
-    /* Fix for iOS Safari height issues */
-    html, body {
-      @apply overflow-hidden h-full;
-      position: fixed;
-      width: 100%;
-    }
-    
-    /* Improve touch interactions */
-    .conversation-item {
-      @apply active:bg-blue-100;
-      touch-action: manipulation;
-    }
-    
-    /* Prevent scroll issues when panels are open */
-    body.panel-open {
-      @apply overflow-hidden;
+    /* Ensure animations don't break layout */
+    .animate-fade-in {
+      will-change: opacity, transform;
     }
 
-    /* Make sure buttons are easily tappable */
-    .chat-header button {
-      @apply min-h-[40px] min-w-[40px] flex items-center justify-center;
+    /* Fix sticky header */
+    .chat-header {
+      @apply sticky top-0;
+      z-index: 40;
+    }
+    
+    /* Improve touch targets */
+    button, a, .conversation-item {
+      min-height: 44px;
     }
   }
-
+  
   /* Enhanced mobile responsiveness */
   @media (max-width: 640px) {
     .chat-messages {

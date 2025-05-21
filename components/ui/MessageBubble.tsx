@@ -22,23 +22,9 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
   
   const formattedTime = format(new Date(timestamp), 'h:mm a')
   
-  // For system messages (alerts, notifications)
+  // System messages are now handled in the parent component
   if (sender === 'system') {
-    return (
-      <div className="flex justify-center my-2 px-4">
-        <div className="bg-amber-100 text-sm py-2 px-4 rounded-md flex items-center justify-between w-full max-w-md">
-          <span>{text}</span>
-          <div className="flex items-center">
-            <span className="text-xs text-gray-500 mr-1">16m</span>
-            <div className="h-8 w-8 rounded-full bg-black flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V6l-8-4-8 4v6c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+    return null;
   }
   
   const isCustomer = sender === 'customer'

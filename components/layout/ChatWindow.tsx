@@ -200,31 +200,25 @@ export default function ChatWindow({
       {/* Chat messages */}
       <div className="chat-messages">
         {messages.map((message) => (
-          message.sender === 'system' ? (
-            <div key={message.id} className="flex justify-center my-2 px-4 animate-fade-in">
-              <div className="bg-amber-100 text-sm py-2 px-4 rounded-md flex items-center justify-between w-full max-w-md transition-all duration-300 hover:bg-amber-200">
-                <span>{message.text}</span>
-                <div className="flex items-center">
-                  <span className="text-xs text-gray-500 mr-1">
-                    {new Date(message.timestamp).getMinutes() - new Date().getMinutes() < 0 
-                      ? `${Math.abs(new Date(message.timestamp).getMinutes() - new Date().getMinutes())}m`
-                      : '16m'}
-                  </span>
-                  <div className="h-8 w-8 rounded-full bg-black flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 22s8-4 8-10V6l-8-4-8 4v6c0 6 8 10 8 10z"></path>
-                    </svg>
+          <div key={message.id} className="animate-fade-in mb-4">
+            {message.sender === 'system' ? (
+              <div className="flex justify-center px-4 py-1">
+                <div className="bg-amber-100 text-sm py-2 px-4 rounded-md flex items-center justify-between w-full max-w-md transition-all duration-200">
+                  <span className="text-amber-800">{message.text}</span>
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-500 mr-1">16m</span>
+                    <div className="h-8 w-8 rounded-full bg-black flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V6l-8-4-8 4v6c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div key={message.id} className="animate-fade-in transition-all duration-300">
-              <MessageBubble
-                message={message}
-              />
-            </div>
-          )
+            ) : (
+              <MessageBubble message={message} />
+            )}
+          </div>
         ))}
         
         {/* AI Copilot section */}
