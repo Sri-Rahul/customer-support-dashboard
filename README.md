@@ -1,7 +1,5 @@
 # Customer Support Dashboard
 
-![Customer Support Dashboard](https://raw.githubusercontent.com/Sri-Rahul/customer-support-dashboard/main/public/screenshot.png)
-
 A modern, responsive customer support interface designed to streamline agent workflows, enhance customer experiences, and improve service efficiency through AI assistance.
 
 ## 🔗 Live Demo
@@ -86,14 +84,6 @@ The dashboard adapts to different screen sizes:
 
 ## 🛠️ Development
 
-### Environment Variables
-
-Create a `.env.local` file in the root directory with the following variables:
-
-```
-NEXT_PUBLIC_API_URL=your_api_url_here
-```
-
 ### Building for Production
 
 ```bash
@@ -110,9 +100,6 @@ yarn build
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 📸 Screenshots
 
