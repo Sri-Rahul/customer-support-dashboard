@@ -124,9 +124,12 @@
   }
 
   .chat-header {
-    @apply flex items-center justify-between px-4 py-3 border-b border-[hsl(var(--border))] bg-white sticky z-20 transition-all duration-300;
-    /* Changed from top-0 to using safe-area-inset-top */
-    top: env(safe-area-inset-top, 0);
+    @apply flex items-center justify-between px-4 py-3 border-b border-[hsl(var(--border))] bg-white z-20 transition-all duration-300;
+    /* Use fixed positioning instead of sticky for mobile browsers */
+    position: sticky;
+    top: 0;
+    /* Add extra padding for mobile browsers */
+    padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
   }
 
   .chat-messages {
@@ -203,8 +206,25 @@
     .chat-container {
       @apply h-screen my-0 rounded-none;
       overflow: hidden;
-      /* Add padding for iOS Safari and other mobile browsers */
-      padding-top: env(safe-area-inset-top, 0);
+      /* Adjusted for mobile browsers */
+      padding-top: 0;
+    }
+    
+    /* Fix for Chrome mobile URL bar */
+    .chat-header {
+      position: sticky;
+      top: 0;
+      padding-top: env(safe-area-inset-top, 10px);
+      z-index: 30;
+      /* Add padding to prevent content from hiding under URL bar */
+      margin-top: constant(safe-area-inset-top);
+      margin-top: env(safe-area-inset-top);
+    }
+
+    /* Add this to fix the root container height */
+    .chat-layout {
+      min-height: -webkit-fill-available;
+      height: 100%;
     }
     
     .detail-panel, .conversation-list {
