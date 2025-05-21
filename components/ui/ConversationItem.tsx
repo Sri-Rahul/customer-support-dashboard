@@ -4,8 +4,22 @@ import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/FixedAvatar'
 import { cn } from '@/lib/utils'
 
+// Define the conversation type to fix the 'any' type warning
+interface Conversation {
+  id: string
+  name: string
+  lastMessage: string
+  time: string
+  isUnread?: boolean | number
+  priority?: string
+  avatar?: string
+  company?: string
+  typing?: boolean
+  online?: boolean
+}
+
 interface ConversationItemProps {
-  conversation: any
+  conversation: Conversation
   isActive: boolean
   onClick: () => void
 }
@@ -22,7 +36,8 @@ export default function ConversationItem({
       className={cn(
         "conversation-item", 
         isActive && "active",
-        isUnread && "font-medium"
+        isUnread && "font-medium",
+        "transition-all duration-200 hover:-translate-y-0.5 active:bg-blue-100"
       )}
       onClick={onClick}
       style={{
@@ -31,8 +46,18 @@ export default function ConversationItem({
         borderBottom: "1px solid #edf0f3",
         padding: "0.75rem 1rem",
         position: "relative",
-        cursor: "pointer"
+        cursor: "pointer",
+        WebkitTapHighlightColor: "transparent" // Remove tap highlight on mobile
       }}
+      // Improve mobile touch handling
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick();
+        }
+      }}
+      aria-selected={isActive}
     >
       <div className="flex items-start">
         <div className="relative mr-3">

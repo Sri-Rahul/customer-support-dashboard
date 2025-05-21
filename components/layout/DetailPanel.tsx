@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
-import { ChevronDown, X, Plus, Send, ArrowUpRight } from 'lucide-react'
+import { ChevronDown, X, Plus, Send, ArrowUpRight, Mail, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getConversationById } from '@/lib/data'
@@ -50,8 +50,9 @@ export default function DetailPanel({
             size="icon" 
             onClick={onClose} 
             className="md:hidden transition-transform duration-200 hover:scale-105"
+            aria-label="Close panel"
           >
-            <X size={18} />
+            <X size={20} />
           </Button>
         )}
         
@@ -63,10 +64,7 @@ export default function DetailPanel({
               }`}
               onClick={() => setActiveTab('copilot')}
             >
-              <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="20" height="16" x="2" y="4" rx="2" stroke="currentColor" strokeWidth="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" stroke="currentColor" strokeWidth="2" />
-              </svg>
+              <Mail className="w-4 h-4 mr-1.5" />
               Copilot
             </button>
             
@@ -76,6 +74,7 @@ export default function DetailPanel({
               }`}
               onClick={() => setActiveTab('details')}
             >
+              <Users className="w-4 h-4 mr-1.5" />
               Details
             </button>
           </div>
@@ -173,54 +172,54 @@ export default function DetailPanel({
                 
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="flex-shrink-0 w-5 h-5 bg-black text-white rounded-sm flex items-center justify-center text-xs">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="18" height="18" x="3" y="3" rx="2" stroke="white" strokeWidth="2" />
-                        <path d="M9 12h6M12 9v6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                    <div className="flex-shrink-0 w-4 h-4 bg-black text-white rounded-full flex items-center justify-center">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 8v8M8 12h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
                       </svg>
-                    </span>
-                    <a href="#" className="text-black font-medium hover:underline transition-all duration-200">Getting a refund</a>
+                    </div>
+                    <a href="#" className="text-gray-800 hover:underline">Getting a refund</a>
                   </div>
                   
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="flex-shrink-0 w-5 h-5 bg-blue-600 text-white rounded-sm flex items-center justify-center text-xs">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex-shrink-0 w-4 h-4 bg-blue-600 text-white rounded-full flex items-center justify-center">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 10h8M8 14h4" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                        <rect width="16" height="18" x="4" y="3" rx="2" stroke="white" strokeWidth="2" />
                       </svg>
-                    </span>
-                    <a href="#" className="text-black hover:underline transition-all duration-200">Refund for an order placed by mistake</a>
+                    </div>
+                    <a href="#" className="text-gray-800 hover:underline">Refund for an order placed by mistake</a>
                   </div>
                   
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="flex-shrink-0 w-5 h-5 bg-blue-600 text-white rounded-sm flex items-center justify-center text-xs">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex-shrink-0 w-4 h-4 bg-blue-600 text-white rounded-full flex items-center justify-center">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 10h8M8 14h4" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                        <rect width="16" height="18" x="4" y="3" rx="2" stroke="white" strokeWidth="2" />
                       </svg>
-                    </span>
-                    <a href="#" className="text-black hover:underline transition-all duration-200">Refund for an unwanted gift</a>
+                    </div>
+                    <a href="#" className="text-gray-800 hover:underline">Refund for an unwanted gift</a>
                   </div>
                   
-                  <div className="mt-2">
-                    <a href="#" className="text-sm text-gray-500 hover:underline flex items-center transition-all duration-200">
-                      See all <ArrowUpRight size={14} className="ml-1" />
+                  <div className="mt-1">
+                    <a href="#" className="text-sm text-gray-500 hover:underline flex items-center">
+                      See all <ArrowUpRight size={12} className="ml-1" />
                     </a>
                   </div>
                 </div>
               </div>
               
               {/* Question Input */}
-              <div className="px-4 py-3 border-t border-gray-200">
+              <div className="px-4 py-4 border-t border-gray-200">
                 <div className="relative">
                   <Input 
                     placeholder="Ask a follow up question..."
-                    className="pr-10 rounded-full bg-gray-50 shadow-sm transition-all duration-200"
+                    className="pr-10 rounded-full bg-gray-50 shadow-sm transition-all duration-200 py-2.5 text-base"
                   />
-                  <Button variant="ghost" size="icon" className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 20V4m-8 8h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200 h-8 w-8"
+                    aria-label="Send message"
+                  >
+                    <Send size={18} className="rotate-45" />
                   </Button>
                 </div>
               </div>
@@ -358,7 +357,7 @@ function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       type="text"
-      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+      className="w-full px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
       {...props}
     />
   )

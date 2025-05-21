@@ -119,71 +119,79 @@ export default function ChatWindow({
 
           {conversation && (
             <div className="flex items-center">
-              <h2 className="text-lg font-semibold text-gray-900">{conversation?.name}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 truncate max-w-[150px] sm:max-w-full">{conversation?.name}</h2>
             </div>
           )}
         </div>
 
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 h-8 w-8">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-          </Button>
-          
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 h-8 w-8">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="1"></circle>
-              <circle cx="19" cy="12" r="1"></circle>
-              <circle cx="5" cy="12" r="1"></circle>
-            </svg>
-          </Button>
+          {/* Simplified controls for mobile */}
+          <div className="hidden md:flex items-center gap-1">
+            <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 h-8 w-8">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </Button>
+            
+            <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 h-8 w-8">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="19" cy="12" r="1"></circle>
+                <circle cx="5" cy="12" r="1"></circle>
+              </svg>
+            </Button>
 
-          <Button 
-            variant="outline"
-            className="bg-gray-100 hover:bg-gray-200 border-gray-200 rounded mx-1 h-8 px-3"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-              <rect width="20" height="16" x="2" y="4" rx="2" />
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-            </svg>
-          </Button>
+            <Button 
+              variant="outline"
+              className="bg-gray-100 hover:bg-gray-200 border-gray-200 rounded mx-1 h-8 px-3"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </Button>
+          </div>
           
-          <Button 
-            variant="outline"
-            className="bg-gray-100 hover:bg-gray-200 border-gray-200 rounded h-8 px-3 flex items-center"
-          >
-            <Phone size={16} className="mr-1" /> Call
-          </Button>
-          
-          <Button 
-            variant="outline"
-            className="bg-gray-100 hover:bg-gray-200 border-gray-200 rounded h-8 px-3 flex items-center"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-            </svg>
-            Snooze
-          </Button>
-          
-          <Button 
-            className="bg-black hover:bg-gray-800 text-white rounded h-8 px-3 flex items-center"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-            Close
-          </Button>
+          {/* Always visible important buttons */}
+          <div className="flex items-center">
+            <Button 
+              variant="outline"
+              className="bg-gray-100 hover:bg-gray-200 border-gray-200 rounded h-8 px-3 flex items-center"
+            >
+              <Phone size={16} className="mr-1" /> 
+              <span className="hidden sm:inline">Call</span>
+            </Button>
+            
+            <Button 
+              variant="outline"
+              className="bg-gray-100 hover:bg-gray-200 border-gray-200 rounded h-8 px-3 flex items-center ml-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span className="hidden sm:inline">Snooze</span>
+            </Button>
+            
+            <Button 
+              className="bg-black hover:bg-gray-800 text-white rounded h-8 px-3 flex items-center ml-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              <span className="hidden sm:inline">Close</span>
+            </Button>
+          </div>
           
           <Button 
             variant="ghost" 
             size="icon"
             onClick={onToggleDetails}
-            className="md:hidden text-gray-400 hover:text-gray-600 h-8 w-8"
+            className="md:hidden text-gray-600 hover:text-gray-900 h-10 w-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center ml-1"
+            aria-label="Show details"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={20} />
           </Button>
         </div>
       </div>
