@@ -124,7 +124,9 @@
   }
 
   .chat-header {
-    @apply flex items-center justify-between px-4 py-3 border-b border-[hsl(var(--border))] bg-white sticky top-0 z-10 transition-all duration-300;
+    @apply flex items-center justify-between px-4 py-3 border-b border-[hsl(var(--border))] bg-white sticky z-20 transition-all duration-300;
+    /* Changed from top-0 to using safe-area-inset-top */
+    top: env(safe-area-inset-top, 0);
   }
 
   .chat-messages {
@@ -201,12 +203,36 @@
     .chat-container {
       @apply h-screen my-0 rounded-none;
       overflow: hidden;
+      /* Add padding for iOS Safari and other mobile browsers */
+      padding-top: env(safe-area-inset-top, 0);
     }
     
     .detail-panel, .conversation-list {
       @apply top-0 bottom-0 bg-white z-40;
       transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      /* Ensure they respect the safe area insets */
+      padding-top: env(safe-area-inset-top, 0);
+    }
+    
+    /* Ensure fixed positioned elements respect viewport */
+    .chat-header {
+      position: sticky;
+      top: env(safe-area-inset-top, 0);
+      /* Increase z-index to ensure it's above other elements */
+      z-index: 30; 
+    }
+    
+    /* Fix for iOS Safari and Chrome mobile */
+    html {
+      height: -webkit-fill-available;
+    }
+    
+    body {
+      min-height: -webkit-fill-available;
+      /* Add more body fixes */
+      @apply overflow-y-auto;
+      overscroll-behavior-y: none;
     }
     
     .conversation-list {
