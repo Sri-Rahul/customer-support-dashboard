@@ -112,6 +112,7 @@ export default function ChatWindow({
               size="icon" 
               onClick={onToggleConversations} 
               className="mr-2"
+              aria-label="Show conversations"
             >
               <Menu size={20} />
             </Button>

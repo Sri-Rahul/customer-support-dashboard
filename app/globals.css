@@ -124,12 +124,14 @@
   }
 
   .chat-header {
-    @apply flex items-center justify-between px-4 py-3 border-b border-[hsl(var(--border))] bg-white z-20 transition-all duration-300;
-    /* Use fixed positioning instead of sticky for mobile browsers */
+    @apply flex items-center justify-between px-4 py-3 border-b border-[hsl(var(--border))] bg-white transition-all duration-300;
     position: sticky;
     top: 0;
-    /* Add extra padding for mobile browsers */
-    padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
+    z-index: 50;
+    /* Add box shadow for better visual separation */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    /* Ensure it respects safe area insets */
+    padding-top: max(10px, env(safe-area-inset-top));
   }
 
   .chat-messages {
@@ -214,13 +216,15 @@
     .chat-header {
       position: sticky;
       top: 0;
-      padding-top: env(safe-area-inset-top, 10px);
-      z-index: 30;
-      /* Add padding to prevent content from hiding under URL bar */
-      margin-top: constant(safe-area-inset-top);
-      margin-top: env(safe-area-inset-top);
+      z-index: 50; /* Higher z-index to ensure visibility */
+      padding-top: max(10px, env(safe-area-inset-top));
+      /* Add stable backdrop for header */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      /* Remove redundant margin */
+      margin-top: 0;
     }
-
+    
     /* Add this to fix the root container height */
     .chat-layout {
       min-height: -webkit-fill-available;
